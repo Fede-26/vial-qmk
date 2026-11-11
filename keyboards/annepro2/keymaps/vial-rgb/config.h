@@ -36,19 +36,9 @@
  * its own reports -- NKRO does not apply there. */
 #define FORCE_NKRO
 
-/* The UART carrying per-key colors to the LED MCU drops bytes at 115200.
- * The symptom is random keys flashing whenever the matrix is near-dark:
- * breathing between breaths, the reactive effects between keystrokes,
- * typing_heatmap as it cools down. See qmk/qmk_firmware#23900 and
- * OpenAnnePro/annepro2-shine#61. 57600 is reliable.
- *
- * This MUST match the baud rate the LED MCU was flashed with. Against a
- * stock 115200 Shine build the LEDs do not respond at all. */
-#define LED_UART_BAUD_RATE 57600
-
 #include "animations.h"
 
-/* Raised from QMK default of 5. With asym_eager_defer_pk in rules.mk this
- * costs no keypress latency: it is the lockout after a press and the window a
- * release must stay stable for. */
-#define DEBOUNCE 10
+/* QMK default. It was briefly raised to 10 to cover the 8.8ms matrix scan
+ * caused by the blocking LED UART; with the scan back at 200Hz that only
+ * served to merge fast repeated taps of the same key into one. */
+#define DEBOUNCE 5
