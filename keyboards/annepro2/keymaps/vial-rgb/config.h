@@ -29,6 +29,13 @@
  * plain `vial` keymap; raising it costs no flash, only EEPROM. */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 3
 
+/* Compiling NKRO in is not enough: QMK still negotiates 6KRO unless the
+ * magic NK_TOGG keycode is pressed. Force it on at every boot. The host
+ * falls back to the boot protocol by itself (BIOS, bootloaders), so this
+ * is safe. Note the Bluetooth path goes through the BLE module and sends
+ * its own reports -- NKRO does not apply there. */
+#define FORCE_NKRO
+
 /* The UART carrying per-key colors to the LED MCU drops bytes at 115200.
  * The symptom is random keys flashing whenever the matrix is near-dark:
  * breathing between breaths, the reactive effects between keystrokes,
