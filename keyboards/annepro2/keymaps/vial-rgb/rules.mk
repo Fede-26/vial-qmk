@@ -42,3 +42,13 @@ RGBLIGHT_ENABLE = no
 # So: correct names without the custom effect, or the custom effect with
 # scrambled names. Drop rgb_matrix_user.inc and switch to vialrgb if you
 # ever decide the palette is not worth it.
+
+# Chattering switches: a contact bounce outlives the debounce window and the
+# key repeats. QMK defaults to sym_defer_g, a single global timer that any key
+# changing state resets for the whole matrix.
+#
+# asym_eager_defer_pk is per-key and asymmetric: a press is reported at once,
+# so no latency is added, and the key is then locked out for DEBOUNCE ms; the
+# release is only reported once it has been stable that long, which is what
+# stops a bounce on release from reading as a second press.
+DEBOUNCE_TYPE = asym_eager_defer_pk

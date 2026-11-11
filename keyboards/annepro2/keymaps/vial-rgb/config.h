@@ -47,3 +47,8 @@
 #define LED_UART_BAUD_RATE 57600
 
 #include "animations.h"
+
+/* Raised from QMK default of 5. With asym_eager_defer_pk in rules.mk this
+ * costs no keypress latency: it is the lockout after a press and the window a
+ * release must stay stable for. */
+#define DEBOUNCE 10
