@@ -38,7 +38,8 @@
 
 #include "animations.h"
 
-/* QMK default. It was briefly raised to 10 to cover the 8.8ms matrix scan
- * caused by the blocking LED UART; with the scan back at 200Hz that only
- * served to merge fast repeated taps of the same key into one. */
-#define DEBOUNCE 5
+/* A little above the QMK default of 5, and it finally means something: with
+ * WAIT_US_TIMER wired up in c18/config.h the matrix scans at ~3300Hz instead
+ * of 200Hz, so 8ms is roughly 26 consecutive confirming samples rather than
+ * a single one. Eager press means it costs no keypress latency. */
+#define DEBOUNCE 8
